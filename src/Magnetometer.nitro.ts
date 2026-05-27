@@ -1,4 +1,4 @@
-import { type HybridObject } from 'react-native-nitro-modules'
+import { type HybridObject } from 'react-native-nitro-modules';
 
 /**
  * Raw magnetometer data representing the ambient magnetic field
@@ -6,13 +6,13 @@ import { type HybridObject } from 'react-native-nitro-modules'
  */
 export interface MagnetometerData {
   /** Magnetic field strength along the x-axis in µT */
-  x: number
+  x: number;
   /** Magnetic field strength along the y-axis in µT */
-  y: number
+  y: number;
   /** Magnetic field strength along the z-axis in µT */
-  z: number
+  z: number;
   /** Timestamp in seconds since boot */
-  timestamp: number
+  timestamp: number;
 }
 
 /**
@@ -22,31 +22,34 @@ export interface MagnetometerData {
  * iOS: CMMotionManager.startMagnetometerUpdates()
  * Android: SensorManager.getDefaultSensor(TYPE_MAGNETIC_FIELD)
  */
-export interface Magnetometer extends HybridObject<{ ios: 'swift'; android: 'kotlin' }> {
+export interface Magnetometer extends HybridObject<{
+  ios: 'swift';
+  android: 'kotlin';
+}> {
   /** Whether the magnetometer sensor is available on this device */
-  readonly isAvailable: boolean
+  readonly isAvailable: boolean;
 
   /** Whether the sensor is currently delivering updates */
-  readonly isActive: boolean
+  readonly isActive: boolean;
 
   /**
    * Set the update interval in milliseconds.
    * Default: 100ms (10Hz).
    */
-  interval: number
+  interval: number;
 
   /**
    * Start receiving magnetometer updates.
    * Register a listener with `onUpdate` before calling this.
    */
-  start(): void
+  start(): void;
 
   /** Stop receiving magnetometer updates. */
-  stop(): void
+  stop(): void;
 
   /**
    * Callback fired on each sensor update.
    * Set this before calling start().
    */
-  onUpdate: ((data: MagnetometerData) => void) | undefined
+  onUpdate: ((data: MagnetometerData) => void) | undefined;
 }

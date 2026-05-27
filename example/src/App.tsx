@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-} from 'react-native'
+} from 'react-native';
 import {
   useAccelerometer,
   useGyroscope,
@@ -14,7 +13,7 @@ import {
   useDeviceMotion,
   useBarometer,
   usePedometer,
-} from 'react-native-nitro-sensors-kit'
+} from 'react-native-nitro-sensors-kit';
 
 // ─── Sensor Card ────────────────────────────────────────────
 function SensorCard({
@@ -23,17 +22,20 @@ function SensorCard({
   onToggle,
   children,
 }: {
-  title: string
-  active: boolean
-  onToggle: () => void
-  children: React.ReactNode
+  title: string;
+  active: boolean;
+  onToggle: () => void;
+  children: React.ReactNode;
 }) {
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
         <Text style={styles.cardTitle}>{title}</Text>
         <TouchableOpacity
-          style={[styles.toggle, active ? styles.toggleActive : styles.toggleInactive]}
+          style={[
+            styles.toggle,
+            active ? styles.toggleActive : styles.toggleInactive,
+          ]}
           onPress={onToggle}
         >
           <Text style={styles.toggleText}>{active ? 'ON' : 'OFF'}</Text>
@@ -41,7 +43,7 @@ function SensorCard({
       </View>
       <View style={styles.cardBody}>{children}</View>
     </View>
-  )
+  );
 }
 
 // ─── Value Row ──────────────────────────────────────────────
@@ -51,35 +53,34 @@ function ValueRow({ label, value }: { label: string; value: string }) {
       <Text style={styles.valueLabel}>{label}</Text>
       <Text style={styles.valueText}>{value}</Text>
     </View>
-  )
+  );
 }
 
 // ─── Format helpers ─────────────────────────────────────────
-const fmt = (n: number | undefined) =>
-  n !== undefined ? n.toFixed(3) : '—'
+const fmt = (n?: number) => (n !== undefined ? n.toFixed(3) : '—');
 
-const fmtInt = (n: number | undefined) =>
-  n !== undefined && n !== -1 ? Math.round(n).toString() : '—'
+const fmtInt = (n?: number) =>
+  n !== undefined && n !== -1 ? Math.round(n).toString() : '—';
 
 // ─── App ────────────────────────────────────────────────────
 export default function App() {
-  const [accelActive, setAccelActive] = useState(false)
-  const [gyroActive, setGyroActive] = useState(false)
-  const [magActive, setMagActive] = useState(false)
-  const [motionActive, setMotionActive] = useState(false)
-  const [baroActive, setBaroActive] = useState(false)
-  const [pedoActive, setPedoActive] = useState(false)
+  const [accelActive, setAccelActive] = useState(false);
+  const [gyroActive, setGyroActive] = useState(false);
+  const [magActive, setMagActive] = useState(false);
+  const [motionActive, setMotionActive] = useState(false);
+  const [baroActive, setBaroActive] = useState(false);
+  const [pedoActive, setPedoActive] = useState(false);
 
   // 100ms update interval for raw sensors
-  const accel = useAccelerometer(100, accelActive)
-  const gyro = useGyroscope(100, gyroActive)
-  const mag = useMagnetometer(100, magActive)
-  const motion = useDeviceMotion(100, motionActive)
-  const baro = useBarometer(baroActive)
-  const pedo = usePedometer(pedoActive)
+  const accel = useAccelerometer(100, accelActive);
+  const gyro = useGyroscope(100, gyroActive);
+  const mag = useMagnetometer(100, magActive);
+  const motion = useDeviceMotion(100, motionActive);
+  const baro = useBarometer(baroActive);
+  const pedo = usePedometer(pedoActive);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
         <Text style={styles.heading}>Nitro Sensors</Text>
         <Text style={styles.subheading}>Tap a sensor to start/stop</Text>
@@ -90,7 +91,7 @@ export default function App() {
           active={accelActive}
           onToggle={() => setAccelActive((p) => !p)}
         >
-          {!accel.isAvailable ? (
+          {!accel.isAvailable && accel.data ? (
             <Text style={styles.unavailable}>Not available</Text>
           ) : (
             <>
@@ -111,9 +112,9 @@ export default function App() {
             <Text style={styles.unavailable}>Not available</Text>
           ) : (
             <>
-              <ValueRow label="X (rad/s)" value={fmt(gyro.data?.x)} />
-              <ValueRow label="Y (rad/s)" value={fmt(gyro.data?.y)} />
-              <ValueRow label="Z (rad/s)" value={fmt(gyro.data?.z)} />
+              <ValueRow label="X (rad/s)" value={fmt(gyro?.data?.x)} />
+              <ValueRow label="Y (rad/s)" value={fmt(gyro?.data?.y)} />
+              <ValueRow label="Z (rad/s)" value={fmt(gyro?.data?.z)} />
             </>
           )}
         </SensorCard>
@@ -146,13 +147,25 @@ export default function App() {
           ) : (
             <>
               <Text style={styles.sectionLabel}>Attitude</Text>
-              <ValueRow label="Pitch" value={fmt(motion.data?.attitude?.pitch)} />
+              <ValueRow
+                label="Pitch"
+                value={fmt(motion.data?.attitude?.pitch)}
+              />
               <ValueRow label="Roll" value={fmt(motion.data?.attitude?.roll)} />
               <ValueRow label="Yaw" value={fmt(motion.data?.attitude?.yaw)} />
               <Text style={styles.sectionLabel}>User Acceleration</Text>
-              <ValueRow label="X (m/s²)" value={fmt(motion.data?.userAcceleration?.x)} />
-              <ValueRow label="Y (m/s²)" value={fmt(motion.data?.userAcceleration?.y)} />
-              <ValueRow label="Z (m/s²)" value={fmt(motion.data?.userAcceleration?.z)} />
+              <ValueRow
+                label="X (m/s²)"
+                value={fmt(motion.data?.userAcceleration?.x)}
+              />
+              <ValueRow
+                label="Y (m/s²)"
+                value={fmt(motion.data?.userAcceleration?.y)}
+              />
+              <ValueRow
+                label="Z (m/s²)"
+                value={fmt(motion.data?.userAcceleration?.z)}
+              />
               <Text style={styles.sectionLabel}>Gravity</Text>
               <ValueRow label="X (m/s²)" value={fmt(motion.data?.gravity?.x)} />
               <ValueRow label="Y (m/s²)" value={fmt(motion.data?.gravity?.y)} />
@@ -172,8 +185,18 @@ export default function App() {
             <Text style={styles.unavailable}>Not available</Text>
           ) : (
             <>
-              <ValueRow label="Pressure (hPa)" value={fmt(baro.data?.pressure)} />
-              <ValueRow label="Rel. Altitude (m)" value={fmt(baro.data?.relativeAltitude)} />
+              {baro?.data && (
+                <ValueRow
+                  label="Pressure (hPa)"
+                  value={fmt(baro.data?.pressure)}
+                />
+              )}
+              {baro?.data && (
+                <ValueRow
+                  label="Rel. Altitude (m)"
+                  value={fmt(baro.data?.relativeAltitude)}
+                />
+              )}
             </>
           )}
         </SensorCard>
@@ -199,16 +222,28 @@ export default function App() {
               )}
               <ValueRow label="Steps" value={fmtInt(pedo.data?.steps)} />
               <ValueRow label="Distance (m)" value={fmt(pedo.data?.distance)} />
-              <ValueRow label="Pace (s/m)" value={fmt(pedo.data?.currentPace)} />
-              <ValueRow label="Cadence (steps/s)" value={fmt(pedo.data?.currentCadence)} />
-              <ValueRow label="Floors ↑" value={fmtInt(pedo.data?.floorsAscended)} />
-              <ValueRow label="Floors ↓" value={fmtInt(pedo.data?.floorsDescended)} />
+              <ValueRow
+                label="Pace (s/m)"
+                value={fmt(pedo.data?.currentPace)}
+              />
+              <ValueRow
+                label="Cadence (steps/s)"
+                value={fmt(pedo.data?.currentCadence)}
+              />
+              <ValueRow
+                label="Floors ↑"
+                value={fmtInt(pedo.data?.floorsAscended)}
+              />
+              <ValueRow
+                label="Floors ↓"
+                value={fmtInt(pedo.data?.floorsDescended)}
+              />
             </>
           )}
         </SensorCard>
       </ScrollView>
-    </SafeAreaView>
-  )
+    </View>
+  );
 }
 
 // ─── Styles ─────────────────────────────────────────────────
@@ -216,6 +251,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#0A0A0A',
+    paddingTop: 20,
   },
   scroll: {
     padding: 16,
@@ -314,4 +350,4 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#FFFFFF',
   },
-})
+});

@@ -1,40 +1,44 @@
-import { type HybridObject } from 'react-native-nitro-modules'
+import { type HybridObject } from 'react-native-nitro-modules';
 
 /**
  * Permission status for motion/activity recognition.
  */
-export type PermissionStatus = 'granted' | 'denied' | 'restricted' | 'notDetermined'
+export type PermissionStatus =
+  | 'granted'
+  | 'denied'
+  | 'restricted'
+  | 'notDetermined';
 
 /**
  * Live pedometer data delivered via step counting updates.
  */
 export interface PedometerData {
   /** Number of steps taken since start() was called */
-  steps: number
+  steps: number;
   /** Estimated distance in meters. -1 if unavailable. */
-  distance: number
+  distance: number;
   /**
    * Current pace in seconds per meter. -1 if unavailable.
    * iOS only — returns -1 on Android.
    */
-  currentPace: number
+  currentPace: number;
   /**
    * Current cadence in steps per second. -1 if unavailable.
    * iOS only — returns -1 on Android.
    */
-  currentCadence: number
+  currentCadence: number;
   /**
    * Number of floors ascended. -1 if unavailable.
    * iOS only — returns -1 on Android.
    */
-  floorsAscended: number
+  floorsAscended: number;
   /**
    * Number of floors descended. -1 if unavailable.
    * iOS only — returns -1 on Android.
    */
-  floorsDescended: number
+  floorsDescended: number;
   /** Timestamp in seconds since boot */
-  timestamp: number
+  timestamp: number;
 }
 
 /**
@@ -47,17 +51,20 @@ export interface PedometerData {
  * iOS: CMPedometer
  * Android: SensorManager TYPE_STEP_COUNTER + TYPE_STEP_DETECTOR
  */
-export interface Pedometer extends HybridObject<{ ios: 'swift'; android: 'kotlin' }> {
+export interface Pedometer extends HybridObject<{
+  ios: 'swift';
+  android: 'kotlin';
+}> {
   /** Whether step counting is available on this device */
-  readonly isAvailable: boolean
+  readonly isAvailable: boolean;
 
   /** Whether the pedometer is currently delivering updates */
-  readonly isActive: boolean
+  readonly isActive: boolean;
 
   /**
    * Check current permission status without prompting the user.
    */
-  checkPermission(): Promise<PermissionStatus>
+  checkPermission(): Promise<PermissionStatus>;
 
   /**
    * Request motion/activity recognition permission from the user.
@@ -67,17 +74,17 @@ export interface Pedometer extends HybridObject<{ ios: 'swift'; android: 'kotlin
    * Android: Triggers ACTIVITY_RECOGNITION runtime permission (API 29+).
    *         Pre-API 29 always returns 'granted'.
    */
-  requestPermission(): Promise<PermissionStatus>
+  requestPermission(): Promise<PermissionStatus>;
 
   /**
    * Start receiving live pedometer updates.
    * Automatically requests permission if not yet granted.
    * Register a listener with `onUpdate` before calling this.
    */
-  start(): void
+  start(): void;
 
   /** Stop receiving pedometer updates. */
-  stop(): void
+  stop(): void;
 
   /**
    * Query historical pedometer data between two timestamps.
@@ -88,11 +95,14 @@ export interface Pedometer extends HybridObject<{ ios: 'swift'; android: 'kotlin
    * iOS: CMPedometer.queryPedometerData(from:to:)
    * Android: Not natively supported — returns current session data only.
    */
-  queryHistoricalData(startTime: number, endTime: number): Promise<PedometerData>
+  queryHistoricalData(
+    startTime: number,
+    endTime: number
+  ): Promise<PedometerData>;
 
   /**
    * Callback fired on each pedometer update (typically every few steps).
    * Set this before calling start().
    */
-  onUpdate: ((data: PedometerData) => void) | undefined
+  onUpdate: ((data: PedometerData) => void) | undefined;
 }

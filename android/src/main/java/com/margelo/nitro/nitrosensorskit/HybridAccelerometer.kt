@@ -1,4 +1,4 @@
-package com.margelo.nitro.nitrosensors
+package com.margelo.nitro.nitrosensorskit
 
 import android.hardware.Sensor
 import android.hardware.SensorEvent

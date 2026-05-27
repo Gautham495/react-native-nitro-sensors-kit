@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from 'react'
-import { gyroscope } from '../index'
-import type { GyroscopeData } from '../Gyroscope.nitro'
+import { useEffect, useState, useRef } from 'react';
+import { gyroscope } from '../index';
+import type { GyroscopeData } from '../Gyroscope.nitro';
 
 /**
  * React hook for gyroscope data.
@@ -10,28 +10,28 @@ import type { GyroscopeData } from '../Gyroscope.nitro'
  * @param active - Whether to receive updates (default: true)
  */
 export function useGyroscope(interval: number = 100, active: boolean = true) {
-  const [data, setData] = useState<GyroscopeData | null>(null)
-  const callbackRef = useRef(setData)
-  callbackRef.current = setData
+  const [data, setData] = useState<GyroscopeData | null>(null);
+  const callbackRef = useRef(setData);
+  callbackRef.current = setData;
 
   useEffect(() => {
-    if (!active || !gyroscope.isAvailable) return
+    if (!active || !gyroscope.isAvailable) return;
 
-    gyroscope.interval = interval
+    gyroscope.interval = interval;
     gyroscope.onUpdate = (sensorData) => {
-      callbackRef.current(sensorData)
-    }
-    gyroscope.start()
+      callbackRef.current(sensorData);
+    };
+    gyroscope.start();
 
     return () => {
-      gyroscope.stop()
-      gyroscope.onUpdate = undefined
-    }
-  }, [interval, active])
+      gyroscope.stop();
+      gyroscope.onUpdate = undefined;
+    };
+  }, [interval, active]);
 
   return {
     data,
     isAvailable: gyroscope.isAvailable,
     isActive: gyroscope.isActive,
-  }
+  };
 }

@@ -1,18 +1,18 @@
-import { type HybridObject } from 'react-native-nitro-modules'
+import { type HybridObject } from 'react-native-nitro-modules';
 
 /**
  * Barometric pressure and altitude data.
  */
 export interface BarometerData {
   /** Atmospheric pressure in hectopascals (hPa / mbar) */
-  pressure: number
+  pressure: number;
   /**
    * Relative altitude change in meters since startUpdates() was called.
    * iOS only — returns 0 on Android (compute from pressure deltas instead).
    */
-  relativeAltitude: number
+  relativeAltitude: number;
   /** Timestamp in seconds since boot */
-  timestamp: number
+  timestamp: number;
 }
 
 /**
@@ -26,12 +26,15 @@ export interface BarometerData {
  * Note: iOS absolute altitude (iOS 15+) requires NSMotionUsageDescription
  * but is NOT exposed in this interface — only relative altitude is provided.
  */
-export interface Barometer extends HybridObject<{ ios: 'swift'; android: 'kotlin' }> {
+export interface Barometer extends HybridObject<{
+  ios: 'swift';
+  android: 'kotlin';
+}> {
   /** Whether the barometer sensor is available on this device */
-  readonly isAvailable: boolean
+  readonly isAvailable: boolean;
 
   /** Whether the sensor is currently delivering updates */
-  readonly isActive: boolean
+  readonly isActive: boolean;
 
   /**
    * Start receiving barometer updates.
@@ -40,14 +43,14 @@ export interface Barometer extends HybridObject<{ ios: 'swift'; android: 'kotlin
    * Note: Unlike other sensors, barometer update interval is
    * controlled by the OS and cannot be configured.
    */
-  start(): void
+  start(): void;
 
   /** Stop receiving barometer updates. */
-  stop(): void
+  stop(): void;
 
   /**
    * Callback fired on each barometer update.
    * Set this before calling start().
    */
-  onUpdate: ((data: BarometerData) => void) | undefined
+  onUpdate: ((data: BarometerData) => void) | undefined;
 }

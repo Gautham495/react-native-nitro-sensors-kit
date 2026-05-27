@@ -1,4 +1,4 @@
-import { type HybridObject } from 'react-native-nitro-modules'
+import { type HybridObject } from 'react-native-nitro-modules';
 
 /**
  * Raw gyroscope data representing angular velocity
@@ -6,13 +6,13 @@ import { type HybridObject } from 'react-native-nitro-modules'
  */
 export interface GyroscopeData {
   /** Angular velocity around the x-axis in rad/s */
-  x: number
+  x: number;
   /** Angular velocity around the y-axis in rad/s */
-  y: number
+  y: number;
   /** Angular velocity around the z-axis in rad/s */
-  z: number
+  z: number;
   /** Timestamp in seconds since boot */
-  timestamp: number
+  timestamp: number;
 }
 
 /**
@@ -22,31 +22,34 @@ export interface GyroscopeData {
  * iOS: CMMotionManager.startGyroUpdates()
  * Android: SensorManager.getDefaultSensor(TYPE_GYROSCOPE)
  */
-export interface Gyroscope extends HybridObject<{ ios: 'swift'; android: 'kotlin' }> {
+export interface Gyroscope extends HybridObject<{
+  ios: 'swift';
+  android: 'kotlin';
+}> {
   /** Whether the gyroscope sensor is available on this device */
-  readonly isAvailable: boolean
+  readonly isAvailable: boolean;
 
   /** Whether the sensor is currently delivering updates */
-  readonly isActive: boolean
+  readonly isActive: boolean;
 
   /**
    * Set the update interval in milliseconds.
    * Default: 100ms (10Hz).
    */
-  interval: number
+  interval: number;
 
   /**
    * Start receiving gyroscope updates.
    * Register a listener with `onUpdate` before calling this.
    */
-  start(): void
+  start(): void;
 
   /** Stop receiving gyroscope updates. */
-  stop(): void
+  stop(): void;
 
   /**
    * Callback fired on each sensor update.
    * Set this before calling start().
    */
-  onUpdate: ((data: GyroscopeData) => void) | undefined
+  onUpdate: ((data: GyroscopeData) => void) | undefined;
 }

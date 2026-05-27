@@ -1,4 +1,4 @@
-package com.margelo.nitro.nitrosensors
+package com.margelo.nitro.nitrosensorskit
 
 import android.Manifest
 import android.content.Context
