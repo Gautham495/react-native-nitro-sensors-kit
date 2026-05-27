@@ -5,7 +5,7 @@
   },
   "android": {
     "androidNamespace": ["nitrosensorskit"],
-    "androidCxxLibName": "NitroSensorsSkit"
+    "androidCxxLibName": "NitroSensorsKit"
   },
   "autolinking": {
     "Accelerometer": {
