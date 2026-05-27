@@ -1,6 +1,6 @@
 {
   "name": "react-native-nitro-sensors-kit",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "High-performance sensor access for React Native built with Nitro Modules. Accelerometer, Gyroscope, Magnetometer, Device Motion, Barometer, and Pedometer with zero-bridge JSI-powered native access.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
