@@ -41,14 +41,10 @@ cd ios && pod install
 <table>
   <tr>
     <th align="center">🍏 iOS Demo</th>
-    <th align="center">🤖 Android Demo</th>
   </tr>
   <tr>
     <td align="center">
     <img alt="android" src="./docs/img/iOS.jpeg"  height="650" width="300"/>
-    </td>
-    <td align="center">
-    <div>Screenshot Coming Soon!</div>
     </td>
   </tr>
 </table>
