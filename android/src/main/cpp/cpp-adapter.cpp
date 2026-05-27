@@ -1,5 +1,5 @@
 #include <jni.h>
-#include "nitrosensorskitOnLoad.hpp"
+#include "NitroSensorsKitOnLoad.hpp"
 
 #include <fbjni/fbjni.h>
 
