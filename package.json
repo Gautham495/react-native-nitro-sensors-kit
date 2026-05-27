@@ -1,6 +1,6 @@
 {
   "name": "react-native-nitro-sensors-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "react-native-nitro-sensors-kit",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
@@ -78,8 +78,8 @@
     "del-cli": "^7.0.0",
     "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-ft-flow": "^3.0.11",
+    "eslint-plugin-prettier": "^5.5.4",
     "jest": "^30.3.0",
     "lefthook": "^2.1.4",
     "nitrogen": "^0.35.7",
