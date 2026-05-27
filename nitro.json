@@ -1,0 +1,74 @@
+{
+  "$schema": "https://nitro.margelo.com/nitro.schema.json",
+  "cxxNamespace": ["nitrosensors"],
+  "ios": {
+    "iosModuleName": "NitroSensors"
+  },
+  "android": {
+    "androidNamespace": ["nitrosensors"],
+    "androidCxxLibName": "NitroSensors"
+  },
+  "autolinking": {
+    "Accelerometer": {
+      "ios": {
+        "language": "swift",
+        "implementationClassName": "HybridAccelerometer"
+      },
+      "android": {
+        "language": "kotlin",
+        "implementationClassName": "HybridAccelerometer"
+      }
+    },
+    "Gyroscope": {
+      "ios": {
+        "language": "swift",
+        "implementationClassName": "HybridGyroscope"
+      },
+      "android": {
+        "language": "kotlin",
+        "implementationClassName": "HybridGyroscope"
+      }
+    },
+    "Magnetometer": {
+      "ios": {
+        "language": "swift",
+        "implementationClassName": "HybridMagnetometer"
+      },
+      "android": {
+        "language": "kotlin",
+        "implementationClassName": "HybridMagnetometer"
+      }
+    },
+    "DeviceMotion": {
+      "ios": {
+        "language": "swift",
+        "implementationClassName": "HybridDeviceMotion"
+      },
+      "android": {
+        "language": "kotlin",
+        "implementationClassName": "HybridDeviceMotion"
+      }
+    },
+    "Barometer": {
+      "ios": {
+        "language": "swift",
+        "implementationClassName": "HybridBarometer"
+      },
+      "android": {
+        "language": "kotlin",
+        "implementationClassName": "HybridBarometer"
+      }
+    },
+    "Pedometer": {
+      "ios": {
+        "language": "swift",
+        "implementationClassName": "HybridPedometer"
+      },
+      "android": {
+        "language": "kotlin",
+        "implementationClassName": "HybridPedometer"
+      }
+    }
+  },
+  "ignorePaths": ["node_modules"]
+}
