@@ -1,7 +1,7 @@
 project(nitrosensorskit)
 cmake_minimum_required(VERSION 3.9.0)
 
-set(PACKAGE_NAME NitroSensorskit)
+set(PACKAGE_NAME NitroSensorsKit)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 20)
 
